@@ -2,7 +2,9 @@ version: '3'
 
 services:
   nginx-router:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "${NGINX_PORT:-9090}:80"
     volumes:
