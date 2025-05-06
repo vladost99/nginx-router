@@ -6,7 +6,8 @@ services:
     ports:
       - "${NGINX_PORT:-9090}:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf.template:ro
+      - ./entrypoint.sh:/docker-entrypoint.d/40-envsubst-config.sh:ro
     environment:
       - FRONTEND_CONTAINER=${FRONTEND_CONTAINER:-frontend}
       - FRONTEND_PORT=${FRONTEND_PORT:-3000}
