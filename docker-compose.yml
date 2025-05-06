@@ -14,4 +14,4 @@ services:
       - BACKEND_API_PORT=${BACKEND_API_PORT:-8000}
     # Важливий маркер для кешування: змінюйте це число, щоб примусово перебудувати імедж
     labels:
-      - "cache.rebuild=5"
+      - "cache.rebuild=6"
