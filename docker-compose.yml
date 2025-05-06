@@ -12,6 +12,12 @@ services:
       - FRONTEND_PAGE_PORT=${FRONTEND_PAGE_PORT:-3001}
       - BACKEND_API_CONTAINER=${BACKEND_API_CONTAINER:-backend-api}
       - BACKEND_API_PORT=${BACKEND_API_PORT:-8000}
+    networks:
+      - dokploy-network
     # Важливий маркер для кешування: змінюйте це число, щоб примусово перебудувати імедж
     labels:
-      - "cache.rebuild=7"
+      - "cache.rebuild=8"
+
+networks:
+  dokploy-network:
+    external: true
