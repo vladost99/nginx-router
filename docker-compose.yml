@@ -12,17 +12,7 @@ services:
       - FRONTEND_PAGE_PORT=${FRONTEND_PAGE_PORT:-3001}
       - BACKEND_API_CONTAINER=${BACKEND_API_CONTAINER:-backend-api}
       - BACKEND_API_PORT=${BACKEND_API_PORT:-8000}
-    networks:
-      - dokploy-network
     # Важливий маркер для кешування: змінюйте це число, щоб примусово перебудувати імедж
     labels:
       - "cache.rebuild=9"
       # Додаємо лейбли для Traefik щоб також перевірити роботу через нього
-      - "traefik.enable=true"
-      - "traefik.http.routers.nginx-router.rule=Host(`${DOMAIN:-nginx-router.example.com}`)"
-      - "traefik.http.routers.nginx-router.entrypoints=web,websecure"
-      - "traefik.http.services.nginx-router.loadbalancer.server.port=80"
-
-networks:
-  dokploy-network:
-    external: true
