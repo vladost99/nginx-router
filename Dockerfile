@@ -6,6 +6,15 @@ RUN rm -f /etc/nginx/conf.d/default.conf
 # Копіюємо нашу конфігурацію
 COPY nginx.conf /etc/nginx/nginx.conf.template
 
+# Створюємо тестовий HTML-файл
+RUN mkdir -p /usr/share/nginx/html && \
+    echo '<!DOCTYPE html><html><head><title>Nginx Router Test</title></head><body>' > /usr/share/nginx/html/test.html && \
+    echo '<h1>Nginx Router Test Page</h1>' >> /usr/share/nginx/html/test.html && \
+    echo '<p>This is a test page served directly from Nginx.</p>' >> /usr/share/nginx/html/test.html && \
+    echo '<p>Time: ' >> /usr/share/nginx/html/test.html && \
+    date >> /usr/share/nginx/html/test.html && \
+    echo '</p></body></html>' >> /usr/share/nginx/html/test.html
+
 # Установлюємо envsubst, якщо він не встановлений (але зазвичай він є)
 RUN which envsubst || apk add --no-cache gettext
 
