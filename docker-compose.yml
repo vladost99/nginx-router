@@ -16,7 +16,12 @@ services:
       - dokploy-network
     # Важливий маркер для кешування: змінюйте це число, щоб примусово перебудувати імедж
     labels:
-      - "cache.rebuild=8"
+      - "cache.rebuild=9"
+      # Додаємо лейбли для Traefik щоб також перевірити роботу через нього
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx-router.rule=Host(`${DOMAIN:-nginx-router.example.com}`)"
+      - "traefik.http.routers.nginx-router.entrypoints=web,websecure"
+      - "traefik.http.services.nginx-router.loadbalancer.server.port=80"
 
 networks:
   dokploy-network:
