@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  nginx-router:
+    image: nginx:alpine
+    ports:
+      - "${NGINX_PORT:-80}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    environment:
+      - FRONTEND_CONTAINER=${FRONTEND_CONTAINER:-frontend}
+      - FRONTEND_PORT=${FRONTEND_PORT:-3000}
+      - FRONTEND_PAGE_CONTAINER=${FRONTEND_PAGE_CONTAINER:-frontend-page}
+      - FRONTEND_PAGE_PORT=${FRONTEND_PAGE_PORT:-3001}
+      - BACKEND_API_CONTAINER=${BACKEND_API_CONTAINER:-backend-api}
+      - BACKEND_API_PORT=${BACKEND_API_PORT:-8000}
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true 

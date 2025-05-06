@@ -1,0 +1,14 @@
+# Nginx конфігурація
+NGINX_PORT=80
+
+# Контейнер фронтенд додатку (основний сайт)
+FRONTEND_CONTAINER=frontend
+FRONTEND_PORT=3000
+
+# Контейнер фронтенд сторінок додатку
+FRONTEND_PAGE_CONTAINER=frontend-page
+FRONTEND_PAGE_PORT=3001
+
+# Backend API контейнер
+BACKEND_API_CONTAINER=backend-api
+BACKEND_API_PORT=8000 
