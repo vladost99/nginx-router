@@ -5,13 +5,13 @@ NGINX_PORT=9090
 DOMAIN=app.example.com
 
 # Контейнер фронтенд додатку (основний сайт)
-FRONTEND_CONTAINER=frontend
+FRONTEND_CONTAINER=testproject1-umami-dev-ndyghb
 FRONTEND_PORT=3000
 
 # Контейнер фронтенд сторінок додатку
-FRONTEND_PAGE_CONTAINER=frontend-page
-FRONTEND_PAGE_PORT=3001
+FRONTEND_PAGE_CONTAINER=browsinglog-page-ff4cb3
+FRONTEND_PAGE_PORT=3000
 
 # Backend API контейнер
-BACKEND_API_CONTAINER=backend-api
-BACKEND_API_PORT=8000 
+BACKEND_API_CONTAINER=testproject1-browsing-service-ai-yzi23x
+BACKEND_API_PORT=3000 
