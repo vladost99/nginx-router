@@ -12,6 +12,8 @@ services:
       - FRONTEND_PAGE_PORT=${FRONTEND_PAGE_PORT:-3001}
       - BACKEND_API_CONTAINER=${BACKEND_API_CONTAINER:-backend-api}
       - BACKEND_API_PORT=${BACKEND_API_PORT:-8000}
+    # Використовуємо мережу хоста для кращої взаємодії з іншими контейнерами
+    network_mode: "bridge"
     # Важливий маркер для кешування
     labels:
-      - "cache.rebuild=10"
+      - "cache.rebuild=11"
