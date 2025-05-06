@@ -37,8 +37,10 @@ RUN echo '#!/bin/sh' > /docker-entrypoint.sh && \
     echo 'ln -sf /dev/stdout /var/log/nginx/access.log' >> /docker-entrypoint.sh && \
     echo 'ln -sf /dev/stderr /var/log/nginx/error.log' >> /docker-entrypoint.sh && \
     echo 'echo "=== Network diagnostics ==="' >> /docker-entrypoint.sh && \
-    echo 'echo "Docker networks:"' >> /docker-entrypoint.sh && \
-    echo 'ls -la /etc/networks/' >> /docker-entrypoint.sh && \
+    echo 'echo "Hostname:"' >> /docker-entrypoint.sh && \
+    echo 'hostname' >> /docker-entrypoint.sh && \
+    echo 'echo "Container ID:"' >> /docker-entrypoint.sh && \
+    echo 'cat /proc/self/cgroup | grep -o -E "([0-9a-f]{64})" | head -n 1 || echo "Cannot determine container ID"' >> /docker-entrypoint.sh && \
     echo 'echo "Interfaces:"' >> /docker-entrypoint.sh && \
     echo 'ip addr' >> /docker-entrypoint.sh && \
     echo 'echo "Route table:"' >> /docker-entrypoint.sh && \
