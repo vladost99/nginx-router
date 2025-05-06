@@ -1,6 +1,9 @@
 # Nginx конфігурація
 NGINX_PORT=80
 
+# Traefik конфігурація
+DOMAIN=app.example.com
+
 # Контейнер фронтенд додатку (основний сайт)
 FRONTEND_CONTAINER=frontend
 FRONTEND_PORT=3000
