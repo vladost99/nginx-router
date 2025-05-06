@@ -25,15 +25,18 @@ RUN echo '#!/bin/sh' > /docker-entrypoint.sh && \
     echo 'ln -sf /dev/stdout /var/log/nginx/access.log' >> /docker-entrypoint.sh && \
     echo 'ln -sf /dev/stderr /var/log/nginx/error.log' >> /docker-entrypoint.sh && \
     echo 'echo "Testing network connectivity..."' >> /docker-entrypoint.sh && \
-    echo 'FRONTEND_HOST=\$(echo \$FRONTEND_CONTAINER | cut -d: -f1)' >> /docker-entrypoint.sh && \
-    echo 'FRONTEND_PAGE_HOST=\$(echo \$FRONTEND_PAGE_CONTAINER | cut -d: -f1)' >> /docker-entrypoint.sh && \
-    echo 'BACKEND_API_HOST=\$(echo \$BACKEND_API_CONTAINER | cut -d: -f1)' >> /docker-entrypoint.sh && \
-    echo 'echo "Testing ping to \$FRONTEND_HOST..."' >> /docker-entrypoint.sh && \
-    echo 'ping -c 1 \$FRONTEND_HOST || echo "WARNING: Cannot ping \$FRONTEND_HOST"' >> /docker-entrypoint.sh && \
-    echo 'echo "Testing ping to \$FRONTEND_PAGE_HOST..."' >> /docker-entrypoint.sh && \
-    echo 'ping -c 1 \$FRONTEND_PAGE_HOST || echo "WARNING: Cannot ping \$FRONTEND_PAGE_HOST"' >> /docker-entrypoint.sh && \
-    echo 'echo "Testing ping to \$BACKEND_API_HOST..."' >> /docker-entrypoint.sh && \
-    echo 'ping -c 1 \$BACKEND_API_HOST || echo "WARNING: Cannot ping \$BACKEND_API_HOST"' >> /docker-entrypoint.sh && \
+    echo 'if [ -n "$FRONTEND_CONTAINER" ]; then' >> /docker-entrypoint.sh && \
+    echo '  echo "Testing ping to $FRONTEND_CONTAINER..."' >> /docker-entrypoint.sh && \
+    echo '  ping -c 1 $FRONTEND_CONTAINER || echo "WARNING: Cannot ping $FRONTEND_CONTAINER"' >> /docker-entrypoint.sh && \
+    echo 'fi' >> /docker-entrypoint.sh && \
+    echo 'if [ -n "$FRONTEND_PAGE_CONTAINER" ]; then' >> /docker-entrypoint.sh && \
+    echo '  echo "Testing ping to $FRONTEND_PAGE_CONTAINER..."' >> /docker-entrypoint.sh && \
+    echo '  ping -c 1 $FRONTEND_PAGE_CONTAINER || echo "WARNING: Cannot ping $FRONTEND_PAGE_CONTAINER"' >> /docker-entrypoint.sh && \
+    echo 'fi' >> /docker-entrypoint.sh && \
+    echo 'if [ -n "$BACKEND_API_CONTAINER" ]; then' >> /docker-entrypoint.sh && \
+    echo '  echo "Testing ping to $BACKEND_API_CONTAINER..."' >> /docker-entrypoint.sh && \
+    echo '  ping -c 1 $BACKEND_API_CONTAINER || echo "WARNING: Cannot ping $BACKEND_API_CONTAINER"' >> /docker-entrypoint.sh && \
+    echo 'fi' >> /docker-entrypoint.sh && \
     echo 'echo "Starting Nginx with extended debug logging..."' >> /docker-entrypoint.sh && \
     echo 'exec nginx-debug -g "daemon off; error_log /dev/stderr debug;"' >> /docker-entrypoint.sh && \
     chmod +x /docker-entrypoint.sh
