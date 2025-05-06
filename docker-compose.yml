@@ -15,3 +15,5 @@ services:
       - FRONTEND_PAGE_PORT=${FRONTEND_PAGE_PORT:-3001}
       - BACKEND_API_CONTAINER=${BACKEND_API_CONTAINER:-backend-api}
       - BACKEND_API_PORT=${BACKEND_API_PORT:-8000}
+    # Перенаправляємо логи Nginx у stdout/stderr для Docker
+    command: [nginx-debug, '-g', 'daemon off;']
